@@ -1,11 +1,16 @@
 import React from "react";
-import Logo from "./Componentes"
+import Navbar from "./Components/Navbar/Navbar";
 
 
 
 
 const App = () => {
-  return <h1>Hola Mundo</h1>
+  return (
+    <>
+      <Navbar />
+    </>
+  )
+
 }
 
 export default App
