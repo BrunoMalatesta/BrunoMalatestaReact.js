@@ -1,25 +1,35 @@
 import React from "react";
 import './Navbar.css'
 import Logo from "../../assets/logonike.png";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { CartWidget } from "./CartWidget"
+
+const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
+
+    const categorias = [
+        {nombre:"Remeras", id:0, ruta:"#"},
+        {nombre:"Hoodies", id:1, ruta:"#"},
+        {nombre:"Zapatillas", id:2, ruta:"#"},
+        {nombre:"Indumentaria", id:3, ruta:"#"},
+      ];
 
 
-
-const Navbar =  () => {
     return (
-        <header>
+        <header> 
             <img src={Logo} alt="png-nike" />
-            <h1>Nike Argentina</h1>
-            <nav>
-                <a href="">buzos</a>
-                <a href="">remeras</a>
-                <a href="">indumentaria</a>
-                <a href="">zapatillas</a>
-            </nav>
-            <ShoppingCartIcon color="black" fontSize="large" /> 
+            <h1>Bienvenido {nombreUsuario} {apellidoUsuario}</h1>
+      <nav>
+        {
+          categorias.map((categoria)=>{
+            return <a key={categoria.id} href={categoria.ruta}>{categoria.nombre}</a>
+          })
+        }
+      </nav>
+         
+            <CartWidget/>
+
         </header>
     )
-        
+         
 }
 
 export default Navbar;
