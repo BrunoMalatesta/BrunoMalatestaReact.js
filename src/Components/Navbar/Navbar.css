@@ -2,7 +2,7 @@ header {
     position: sticky;
     display: flex;
     align-items: center;
-    background-color: rgb(173, 173, 173);
+    background-color: rgb(135, 163, 122);
     font-family: sans-serif;
 }
 
@@ -18,3 +18,8 @@ a {
     text-decoration: none;
    
 }
+
+button { 
+    background-color: rgb(116, 139, 105);
+}
+

@@ -1,15 +1,15 @@
 import React from "react";
 import './Navbar.css'
-import Logo from "../../assets/logonike.png";
+import Logo from "../../assets/LOGODANI2.jpg";
 import { CartWidget } from "./CartWidget"
 
 const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
 
     const categorias = [
-        {nombre:"Remeras", id:0, ruta:"#"},
-        {nombre:"Hoodies", id:1, ruta:"#"},
-        {nombre:"Zapatillas", id:2, ruta:"#"},
-        {nombre:"Indumentaria", id:3, ruta:"#"},
+        {nombre:"Alfombras", id:0, ruta:"#"},
+        {nombre:"Proceso", id:1, ruta:"#"},
+        {nombre:"Tu Diseño", id:2, ruta:"#"},
+        {nombre:"Contacto", id:3, ruta:"#"},
       ];
 
 
