@@ -12,7 +12,7 @@ const App = () => {
 
   const onAdd = () => {
     console.log("agg al carrito")
-
+    alert("agg al carrito");
   };
 
   return (
@@ -21,7 +21,7 @@ const App = () => {
      
       <ItemListContainer greeting={mensaje}/>
 
-      <ItemCount stock={5} initial={1} onAdd={onAdd}/>
+      <ItemCount stock={10} initial={1} onAdd={onAdd}/>
 
 
 

@@ -15,7 +15,7 @@ const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
 
     return (
         <header> 
-            <img src={Logo} alt="png-nike" />
+            <img src={Logo} alt="logo daniela" />
             <h1>Bienvenido {nombreUsuario} {apellidoUsuario}</h1>
       <nav>
         {
