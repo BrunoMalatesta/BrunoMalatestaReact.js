@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 export const ItemCount = ({stock, initial, onAdd}) => {
+
   const [count, setCount] = useState(initial);
 
   const handlerClickSumar= () => {
@@ -28,6 +29,8 @@ export const ItemCount = ({stock, initial, onAdd}) => {
       <button onClick={handlerClickAggCarrito}>Agg al Carrito</button>
     </div>
   );
+
+
 };
 
 
