@@ -1,6 +1,6 @@
 import React from "react";
 import './Navbar.css'
-import Logo from "../../assets/LOGODANI2.jpg";
+import Logo from "../../assets/LOGODANI1.jpg";
 import { CartWidget } from "./CartWidget"
 
 const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
@@ -16,7 +16,7 @@ const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
     return (
         <header> 
             <img src={Logo} alt="logo daniela" />
-            <h1>Bienvenido {nombreUsuario} {apellidoUsuario}</h1>
+            <h1>Bienvenido {nombreUsuario} </h1>
       <nav>
         {
           categorias.map((categoria)=>{

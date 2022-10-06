@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css"
 import Navbar from "./Components/Navbar/Navbar";
 import {ItemListContainer} from "./Components/Body/ItemListContainer"
-import {ItemCount} from './ItemCount'
+import {ItemCount} from '../src/Components/Body/ItemCount'
 
 const App = () => {
 
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar nombreUsuario={nombre} apellidoUsuario="Malatesta"/>
+      <Navbar nombreUsuario={nombre}/>
      
       <ItemListContainer greeting={mensaje}/>
 
