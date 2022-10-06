@@ -9,8 +9,8 @@ export  const Item = ({productos}) =>{
         <img src={productos.url} alt="" />
     </div>
        
-     <h1 key={productos.id}>{productos.nombre}</h1>
-     <h2 key={productos.id}>Precio: ${productos.precio}</h2>
+     <p key={productos.id}>{productos.nombre}</p>
+     <p key={productos.id}>Precio: ${productos.precio}</p>
      <button>detalles</button>
      </div>
         

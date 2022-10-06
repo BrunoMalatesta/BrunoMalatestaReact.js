@@ -1,7 +1,7 @@
 .container-card{
    padding-left: 20px;
     padding-right: 20px;
-    border: outset;
+    border: solid;
     border-radius: 5px;
     border-color: black;
 }

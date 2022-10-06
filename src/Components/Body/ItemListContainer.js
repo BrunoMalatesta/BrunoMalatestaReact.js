@@ -5,6 +5,7 @@ import Rata from "../../assets/ratarugg.jpg"
 import Robot from "../../assets/robotrugg.jpg"
 import Pokemon from "../../assets/squirtlerugg.jpg"
 import Gato from"../../assets/gatorugg.jpg"
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const productos = [
@@ -23,12 +24,19 @@ const obtenerProductos = new Promise((resolve, reject)=>{
 
 export const ItemListContainer = ({greeting}) => {
 
+  const [loading, setLoading] = useState(false);
+
   const [productos, setProductos] = useState([]);
 
   useEffect(()=>{
     obtenerProductos
     .then((data)=>{
       setProductos(data)
+      setLoading(true)
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000);
+
     })
     .catch((error)=>{
       console.log(error);
@@ -39,10 +47,16 @@ export const ItemListContainer = ({greeting}) => {
 
   return (
     <>
-      <h1>{greeting}</h1>
+    {
+      loading?
+      <ClipLoader color={'#0d6337'} loading={loading}  size={100} aria-label="Loading Spinner" />
+      :
       <div class="card-item">
-        < ItemList productos={productos} />
+      < ItemList productos={productos} />
       </div>
+    }
+      <h1>{greeting}</h1>
+
     </>
   );
 };
