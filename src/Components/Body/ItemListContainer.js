@@ -5,7 +5,8 @@ import Rata from "../../assets/ratarugg.jpg"
 import Robot from "../../assets/robotrugg.jpg"
 import Pokemon from "../../assets/squirtlerugg.jpg"
 import Gato from"../../assets/gatorugg.jpg"
-import ClipLoader from "react-spinners/ClipLoader";
+import ClockLoader from "react-spinners/ClockLoader";
+import {CSSProperties} from "react";
 
 
 const productos = [
@@ -21,6 +22,8 @@ const obtenerProductos = new Promise((resolve, reject)=>{
   }, 3000);
   //reject("ocurrio un error en la promesa")
 })
+
+
 
 export const ItemListContainer = ({greeting}) => {
 
@@ -44,18 +47,30 @@ export const ItemListContainer = ({greeting}) => {
 
   },[])
 
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    
+  };
 
   return (
     <>
+    <h1>{greeting}</h1>
     {
       loading?
-      <ClipLoader color={'#0d6337'} loading={loading}  size={100} aria-label="Loading Spinner" />
+      <ClockLoader
+      color="#1a7764"
+      cssOverride={override}
+      loading
+      size={100}
+      speedMultiplier={1}
+    />
       :
       <div class="card-item">
       < ItemList productos={productos} />
       </div>
     }
-      <h1>{greeting}</h1>
+      
 
     </>
   );
