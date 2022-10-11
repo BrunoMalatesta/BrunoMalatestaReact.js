@@ -27,7 +27,7 @@ const obtenerProductos = new Promise((resolve, reject)=>{
 
 export const ItemListContainer = ({greeting}) => {
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [productos, setProductos] = useState([]);
 
@@ -35,11 +35,7 @@ export const ItemListContainer = ({greeting}) => {
     obtenerProductos
     .then((data)=>{
       setProductos(data)
-      setLoading(true)
-      setTimeout(() => {
-        setLoading(false)
-      }, 3000);
-
+      setLoading(false)
     })
     .catch((error)=>{
       console.log(error);
