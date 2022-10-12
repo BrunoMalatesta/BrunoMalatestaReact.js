@@ -1,7 +1,7 @@
 import React from "react";
 import './Navbar.css'
 import Logo from "../../assets/LOGODANI1.jpg";
-import { CartWidget } from "./CartWidget"
+import { CartWidget } from "../CartWidget/CartWidget"
 
 const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { ItemDetail } from './ItemDetail'
+import { ItemDetail } from '../ItemsDetail/ItemDetail'
 
 export  const ItemDetailContainer = () => {
 
@@ -8,7 +8,7 @@ export  const ItemDetailContainer = () => {
     const [productosdetails, setProductosdetails] = useState({});
   
     useEffect(()=>{
-        fetch("https://fakestoreapi.com/products/1")
+        fetch("https://fakestoreapi.com/products/2")
         .then((res) => res.json())
         .then((data) => setProductosdetails(data))
         .catch((error)=>{
