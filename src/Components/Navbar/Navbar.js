@@ -6,10 +6,10 @@ import { CartWidget } from "../CartWidget/CartWidget"
 const Navbar =  ({ nombreUsuario, apellidoUsuario}) => {
 
     const categorias = [
-        {nombre:"Alfombras", id:0, ruta:"#"},
-        {nombre:"Proceso", id:1, ruta:"#"},
-        {nombre:"Tu Diseño", id:2, ruta:"#"},
-        {nombre:"Contacto", id:3, ruta:"#"},
+        {nombre:"men's clothing", id:0, ruta:"#"},
+        {nombre:"jewelery", id:1, ruta:"#"},
+        {nombre:"electronics", id:2, ruta:"#"},
+        {nombre:"women's clothing", id:3, ruta:"#"},
       ];
 
 

@@ -1,34 +1,34 @@
 import React, {useEffect, useState} from 'react';
-import { ItemDetail } from '../ItemsDetail/ItemDetail'
+import { ItemDetail } from '../../Components/ItemsDetail/ItemDetail'
 
-export  const ItemDetailContainer = () => {
-
-    const [loading, setLoading] = useState(true);
-
-    const [productosdetails, setProductosdetails] = useState({});
+export const ItemDetailContainer = ({ greeting }) => {
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
   
-    useEffect(()=>{
-        fetch("https://fakestoreapi.com/products/2")
-        .then((res) => res.json())
-        .then((data) => setProductosdetails(data))
-        .catch((error)=>{
-        console.log(error);
-      })
-      .finally(setLoading(false));
+    useEffect(() => {
+      const getProducts = async () => {
+        try {
+          const res = await fetch("https://fakestoreapi.com/products/1")
+          const data = await res.json();
+          setProduct(data);
+        } catch {
+          console.log("error");
+        } finally {
+          setLoading(false);
+        }
+      };
+      getProducts();
     }, []);
 
 
 
 
-  return (
-    <>
-    {
+    return (
       <>
-        {loading ? <h1>cargandoo...</h1> : <ItemDetail productos={productosdetails}/>}
+        <h1>{greeting}</h1>
+        {<>{loading ? <h1>Cargando...</h1> : <ItemDetail product={product} />}</>}
       </>
-    }
-    </>
-  );
-};
+    );
+  };
 
 
