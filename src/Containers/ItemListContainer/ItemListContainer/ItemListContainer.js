@@ -1,23 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import {ItemList} from "../ItemList/ItemList";
 import "./ItemListContainer.css"
-
+import { useParams } from 'react-router-dom';
 
 export const ItemListContainer = ({greeting}) => {
-
+  const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [productos, setProductos] = useState([]);
+  const { id } = useParams();
 
-  useEffect(()=>{
-    fetch("https://fakestoreapi.com/products")
-    .then((res) => res.json())
-    .then((data) => setProductos(data))
-    .catch((error)=>{
-      console.log(error);
-    })
-    .finally(setLoading(false));
-  }, []);
+  const URL_BASE = 'https://fakestoreapi.com/products'
+  const URL_CAT = `${URL_BASE}/category/${id}`
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const res = await fetch( id ? URL_CAT : URL_BASE );
+        const data = await res.json();
+        setProductos(data);
+      } catch {
+        console.log("error");
+      } finally {
+        setLoading(false);
+      }
+    };
+    getProducts();
+  }, [id]);
 
   
 
