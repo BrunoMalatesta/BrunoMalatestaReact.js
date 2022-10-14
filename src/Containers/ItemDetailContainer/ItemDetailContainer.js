@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { ItemDetail } from '../../Components/ItemsDetail/ItemDetail'
-import {ItemCount} from '../../Components/ItemCount/ItemCount'
+import ClockLoader from "react-spinners/ClockLoader";
+
+
 
 export const ItemDetailContainer = ({ greeting }) => {
   const [producto, setProduct] = useState([]);
@@ -32,12 +34,20 @@ export const ItemDetailContainer = ({ greeting }) => {
       alert("agg al carrito");
     };
 
+    const propiedades = {
+      display: "block",
+      margin: "0 auto",
+      
+    };
+
 
     return (
       <>
         <h1>{greeting}</h1>
-        {<>{loading ? <h1>Cargando productos ...</h1> : <ItemDetail producto={producto} />}</>}
-        <ItemCount stock={10} initial={1} onAdd={onAdd}/>
+        {
+          <>
+            {loading ? <ClockLoader color="#1a7764" cssOverride={propiedades} loading size={100} speedMultiplier={1} /> : <ItemDetail producto={producto} />}</>}
+        
       </>
     );
   };
