@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import { ItemDetail } from '../../Components/ItemsDetail/ItemDetail'
 import ClockLoader from "react-spinners/ClockLoader";
-
+import { useParams } from 'react-router-dom';
 
 
 export const ItemDetailContainer = ({ greeting }) => {
   const [producto, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+
+
+  const { id } = useParams();
   
     useEffect(() => {
       const getProducts = async () => {
         try {
-          const res = await fetch("https://fakestoreapi.com/products/1")
+          const res = await fetch("https://fakestoreapi.com/products/" + id)
           const data = await res.json();
           setProduct(data);
         } catch {
