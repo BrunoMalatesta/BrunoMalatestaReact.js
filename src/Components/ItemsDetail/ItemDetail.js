@@ -2,7 +2,13 @@ import React from "react";
 import "../../Components/ItemsDetail/ItemDetail.css"
 import {ItemCount} from '../../Components/ItemCount/ItemCount'
 
-export const ItemDetail = ({ producto , onAdd }) => {
+
+const onAdd = () => {
+  console.log("agg al carrito")
+  alert("agg al carrito");
+};
+
+export const ItemDetail = ({ producto }) => {
   return (
     <div class="item">
       <img class="itemimg" alt={producto.title} src={producto.image} />

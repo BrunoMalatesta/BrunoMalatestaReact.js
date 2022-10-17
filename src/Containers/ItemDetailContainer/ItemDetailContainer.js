@@ -32,11 +32,6 @@ export const ItemDetailContainer = ({ greeting }) => {
 
   
 
-    const onAdd = () => {
-      console.log("agg al carrito")
-      alert("agg al carrito");
-    };
-
     const propiedades = {
       display: "block",
       margin: "0 auto",
