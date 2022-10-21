@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { Context } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 import './Cart.css'
 
 
 export const Cart = () => {
+  const { cart } = useContext(Context);
+
+
+  
   return (
-    <div>
-      <h1>Carrito En Obra</h1>
-      <iframe src="https://giphy.com/embed/fmkYSBlJt3XjNF6p9c" width="2000" height="2000" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/fmkYSBlJt3XjNF6p9c">via GIPHY</a></p>
-    </div>
-  )
-}
+    <>
+      {cart.length === 0 ? (
+        <>
+          <h1>
+            No agregaste productos, <Link to="/">CLICK AQUI</Link>
+          </h1>
+          <h2 >Gracias por tu visita</h2>
+        </>
+      ) : (
+        <>
+          
+          {cart.map((producto) => (
+            <h1 key={producto.id}>{producto.title}</h1>
+           
+          ))}
+        </>
+      )}
+    </>
+  );
+};
 
 
