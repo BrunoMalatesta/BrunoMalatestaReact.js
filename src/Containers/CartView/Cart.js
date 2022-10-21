@@ -15,6 +15,8 @@ export const Cart = () => {
         <>
           <h1>
             No agregaste productos, <Link to="/">CLICK AQUI</Link>
+            <br></br>
+            <iframe src="https://giphy.com/embed/KPgOYtIRnFOOk" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/afvpets-afv-gorilla-KPgOYtIRnFOOk"></a></p>
           </h1>
           <h2 >Gracias por tu visita</h2>
         </>
