@@ -3,50 +3,58 @@ import React, { createContext, useEffect, useState } from "react";
 export const Context = createContext();
 
 export const CustomProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [qty, setQty] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [ cart, setCart ] = useState([]);
+  const [ quantity, setQuantity ] = useState(0);
+  const [ total, setTotal ] = useState(0);
 
   useEffect(() => {
-    setQty(cart.reduce((total, item) => total + item.cantidad, 0))
-    setTotal(cart.reduce((total, item) => total + (item.cantidad * item.price), 0))
-  }, [])
-  
-
-  const addItem = (item, cantidad) => {
-    if (IsInCart(item.id)) {
-      const modificado = cart.map((producto) => {
-        if (producto.id === item.id) {
-          producto.cantidad += cantidad;
-        }
-        return producto;
+      let qtyCart = 0;
+      let totalCart = 0;
+      cart.forEach((item) => {
+          qtyCart += item.quantity;
+          totalCart += item.price * item.quantity;
       });
-      setCart(modificado);
-    } else {
-      setCart([...cart, { ...item, cantidad }]);
-    }
-    setQty(qty + cantidad);
-    setTotal(total + (item.price * cantidad));
-  };
+      setQuantity(qtyCart);
+      setTotal(totalCart)
+  }, [ cart ]);
 
-  const deleteItem = (id) => {
-    const found = cart.find(producto => producto.id === id);
-    setCart(cart.filter((item) => item.id !== id));
-    setQty( qty - found.cantidad)
-    setTotal(total - (found.price * found.cantidad))
-  };
+  const addItem = (item, qty) => {
+      if (isInCart(item.id)) {
+          const updatedCart = cart.map((product) =>
+              product.id === item.id ? (
+                  {...product, quantity: qty}
+              ) : (
+                  product
+              )
+          )
+          setCart(updatedCart);
+      } else {
+          setCart([...cart, {...item, quantity: qty}])
+          setQuantity(quantity + qty)
+      }
+  }
 
-  const IsInCart = (id) => cart.some((item) => item.id === id);
+  const removeItem = (itemId) => {
+      setCart(cart.filter((item) => item.id !== itemId));
+  }
 
   const clear = () => {
-    setCart([]);
-    setQty(0);
-    setTotal(0);
-  };
+      setCart([]);
+      setQuantity(0);
+      setTotal(0);
+  }
+
+  const isInCart = (itemId) => cart.some((item) => item.id === itemId);
+  
+  // Estado que guarda la lista de productos para la barra buscadora del Navbar
+  const [ data, setData ] = useState([]);
+  const itemList = (list) => {
+      setData(list);
+  } 
 
   return (
-    <Context.Provider value={{ cart, qty, total, addItem, deleteItem, clear }}>
-      {children}
-    </Context.Provider>
-  );
-};
+      <Context.Provider value={{ cart, quantity, total, addItem, removeItem, clear, isInCart, data, itemList }}>
+          {children}
+      </Context.Provider>
+  )
+}

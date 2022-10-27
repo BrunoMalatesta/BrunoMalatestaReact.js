@@ -23,8 +23,7 @@ export const ItemCount = ({ stock, initial, onAdd }) => {
       <button onClick={handlerClickRestar}>-</button>
       <button onClick={handlerClickSumar}>+</button>
       <button disabled={stock === 0 } onClick={()=>onAdd(count)}>
-        <span>{stock === 0 ? "No tenemos stock" : "Agrega al carrito"}</span>
-        
+        <span>{stock === 0 ? "No tenemos stock" : "Agrega al carrito"}</span>    
         </button>
     </div>
   );

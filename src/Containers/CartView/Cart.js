@@ -2,35 +2,45 @@ import React, { useContext } from "react";
 import { Context } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import './Cart.css'
+import CartItem from "./CartItem";
 
 
 export const Cart = () => {
-  const { cart } = useContext(Context);
 
 
-  
-  return (
-    <>
-      {cart.length === 0 ? (
-        <>
-          <h1>
-            No agregaste productos, <Link to="/">CLICK AQUI</Link>
-            <br></br>
-            <iframe src="https://giphy.com/embed/KPgOYtIRnFOOk" width="480" height="320" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/afvpets-afv-gorilla-KPgOYtIRnFOOk"></a></p>
-          </h1>
-          <h2 >Gracias por tu visita</h2>
-        </>
-      ) : (
-        <>
-          
-          {cart.map((producto) => (
-            <h1 key={producto.id}>{producto.title}</h1>
-           
-          ))}
-        </>
-      )}
-    </>
-  );
+    const { quantity, cart, total, clear } = useContext(Context);
+
+    return (
+        <section>
+            {
+                quantity === 0 ? (
+                    <h1>Tu carrito está vacío. Para agregar productos presiona <Link to="/" className="message__link">aquí</Link>.</h1>
+                ) : (
+                    <>
+                        <div>
+                            <h1>Mi carrito</h1>
+                            <div>
+                                <Link to="/"><button>Seguir comprando</button></Link>
+                                <span onClick={clear}><button>Vaciar carrito</button></span>
+                            </div>
+                        </div>
+                        {
+                            cart.map((product) => {
+                                return <CartItem key={product.id} product={product} />
+                            })
+                        }
+                        <div>
+                            <div>
+                                <h2>Total Carrito</h2>
+                                <span>${total}</span>
+                            </div>
+                            <button>Comprar</button>
+                        </div>
+                    </>
+                )
+            }
+        </section>
+    )
 };
 
 
