@@ -3,6 +3,8 @@ import {ItemList} from "../ItemList/ItemList";
 import "./ItemListContainer.css"
 import { useParams } from 'react-router-dom';
 import ClockLoader from "react-spinners/ClockLoader";
+import {db} from "../../../Components/Firebase/firebase"
+import {getDocs, collection, query, where} from "firebase/firestore"
 
 
 
@@ -12,23 +14,33 @@ export const ItemListContainer = ({greeting}) => {
 
   const { id } = useParams();
 
-  const URL_BASE = 'https://fakestoreapi.com/products'
-  const URL_CAT = `${URL_BASE}/category/${id}`
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await fetch( id ? URL_CAT : URL_BASE );
-        const data = await res.json();
-        setProductos(data);
-      } catch {
-        console.log("error");
-      } finally {
+    const productCollection = collection(db, 'productos')
+    const q = id ? query(productCollection, where('category', '==', id)) : productCollection;
+
+    const getItem = async () => {
+      try{
+        const answer = await getDocs(q);
+        const dataDocs = answer.docs.map( item => {
+          return {
+            ...item.data(),
+            id: item.id
+          };
+        })
+        setProductos(dataDocs);
+      }
+      catch(error){
+        console.error(error);
+      }
+      finally{
         setLoading(false);
       }
-    };
-    getProducts();
-  }, [id]);
+    }
+
+    getItem();
+  }, [ id]);
+  
 
   
   const propiedades = {

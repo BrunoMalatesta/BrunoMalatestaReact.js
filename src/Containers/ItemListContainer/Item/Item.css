@@ -1,7 +1,9 @@
 .container-card{
    padding-left: 20px;
     padding-right: 20px;
+    padding-bottom: 30px;
     border: solid;
     border-radius: 5px;
     border-color:  rgb(135, 163, 122);
+    display: flex;
 }
