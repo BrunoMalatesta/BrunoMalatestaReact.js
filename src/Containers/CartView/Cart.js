@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import './Cart.css'
 import CartItem from "./CartItem";
 import { db } from '../../Components/Firebase/firebase';
-import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore"
-import Swal from 'sweetalert2'
+import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
+import Swal from 'sweetalert2';
+
 
 
 export const Cart = () => {
@@ -27,16 +28,6 @@ export const Cart = () => {
     })
     .then(result => {
         console.log(result.id);
-        Swal.fire({
-            title: 'Gracias por su compra!',
-            html: `Numero de Referencia de Compra: <b>${result.id}</b>`,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
     });
     modificarStock(cart);
     clear();
@@ -53,7 +44,7 @@ export const Cart = () => {
         <section>
             {
                 quantity === 0 ? (
-                    <h1>Tu carrito está vacío. Para agregar productos presiona <Link to="/" className="message__link">aquí</Link>.</h1>
+                    <h1>Tu carrito está vacío. Para agregar productos presiona <Link to="/">aquí</Link>.</h1>
                 ) : (
                     <>
                         <div>
@@ -73,7 +64,7 @@ export const Cart = () => {
                                 <h2>Total Carrito</h2>
                                 <span>${total}</span>
                             </div>
-                            <button onClick={finalizarCompra}>Comprar</button>
+                            <Link to="/formulario"><button onClick={finalizarCompra}>Comprar</button></Link>
                         </div>
                     </>
                 )
