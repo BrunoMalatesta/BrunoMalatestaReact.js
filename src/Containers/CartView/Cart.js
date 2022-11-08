@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 import './Cart.css'
@@ -6,44 +6,13 @@ import CartItem from "./CartItem";
 import { db } from '../../Components/Firebase/firebase';
 import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
 import Swal from 'sweetalert2';
-import {Formulario} from "../Form/Formulario"
 
 
 
 export const Cart = () => {
  const { quantity, cart, total, clear } = useContext(Context);
- const [ comprador, setComprador ] = useState({});
 
- const finalizarCompra = ()=>{
-    const  ventasCollection = collection(db, "ventas");
-    addDoc(ventasCollection,{
-        comprador,
-        items:cart,
-        total,
-        date:serverTimestamp()
-    })
-    .then(result => {
-        Swal.fire({
-            title: 'Gracias por su compra!',
-            html: `Numero de Referencia de Compra: <b>${result.id}</b>`,
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
-    });
-    modificarStock(cart);
-    clear();
- }
-
- const modificarStock = () => {
-    cart.forEach(item => {
-        const product = doc(db, "productos", item.id);
-        updateDoc(product, {stock: item.stock - item.quantity})
-    })
-}
+ 
 
     return (
         <section>
@@ -69,7 +38,7 @@ export const Cart = () => {
                                 <h2>Total Carrito</h2>
                                 <span>${total}</span>
                             </div>
-                            <Formulario setComprador={setComprador}   finalizarCompra={finalizarCompra} />
+                            <Link to="/formulario"><button>Comprar</button></Link>
                         </div>
                     </>
                 )

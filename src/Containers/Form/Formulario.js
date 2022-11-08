@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from "react";
 import 'semantic-ui-css/semantic.min.css'
 import {Container, Form, Button} from "semantic-ui-react"
 import {useFormik} from "formik";
 import * as Yup from "yup"
+import { db } from '../../Components/Firebase/firebase';
+import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
+import { Context } from "../../context/CartContext";
+import Swal from 'sweetalert2';
 
 
 
-export const Formulario = (setComprador, finalizarCompra) => {
-
+export const Formulario = () => {
+  const { quantity, cart, total, clear } = useContext(Context);
 
   const formik = useFormik({
     initialValues: {
@@ -22,12 +26,55 @@ export const Formulario = (setComprador, finalizarCompra) => {
     }),
     onSubmit:(formData) => {
       console.log(formData)
- 
-    } 
+    }
     
  })
 
- 
+
+
+ const usuario = {
+  name: "Bruno",
+  phone: "+54 2975072078",
+  email: "user@mail.com"
+}
+
+const finalizarCompra = ()=>{
+  const  ventasCollection = collection(db, "ventas");
+  addDoc(ventasCollection,{
+      usuario,
+      items:cart,
+      total,
+      date:serverTimestamp()
+  })
+  .then(result => {
+      console.log(result.id);
+      Swal.fire({
+          title: 'Gracias por su compra!',
+          html: `Numero de Referencia de Compra: <b>${result.id}</b>`,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+
+  });
+  modificarStock(cart);
+  clear();
+}
+
+const modificarStock = () => {
+  cart.forEach(item => {
+      const product = doc(db, "productos", item.id);
+      updateDoc(product, {stock: item.stock - item.quantity})
+  })
+}
+
+
+
+
+
 
   return (
     <Container>
@@ -37,7 +84,7 @@ export const Formulario = (setComprador, finalizarCompra) => {
           <Form.Input type="email" placeholder="Correo Electronico" name="email"onChange={formik.handleChange} error={formik.errors.email} value={formik.values.email}/>
           <Form.Input type="text" placeholder="Direccion" name="direccion"onChange={formik.handleChange} error={formik.errors.direccion} value={formik.values.direccion}/>
 
-          <Button type="submit" onSubmit={finalizarCompra}>Terminar Compra</Button>
+          <Button type="submit" onClick={finalizarCompra}>Finalizar Compra</Button>
           <Button type="button" onClick={formik.handleReset}>Limpiar Formulario</Button>
       </Form>
     </Container>
