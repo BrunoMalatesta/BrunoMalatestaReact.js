@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 
 export const Formulario = () => {
   const {cart, total, clear } = useContext(Context);
-  const [ comprador, setComprador ] = useState([]);
+  const [ comprador, setComprador ] = useState({});
 
   const formik = useFormik({
     initialValues: {
