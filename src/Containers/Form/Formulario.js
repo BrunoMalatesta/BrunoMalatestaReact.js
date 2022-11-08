@@ -6,7 +6,8 @@ import * as Yup from "yup"
 
 
 
-export const Formulario = () => {
+export const Formulario = (setComprador, finalizarCompra) => {
+
 
   const formik = useFormik({
     initialValues: {
@@ -21,8 +22,12 @@ export const Formulario = () => {
     }),
     onSubmit:(formData) => {
       console.log(formData)
-    }
+ 
+    } 
+    
  })
+
+ 
 
   return (
     <Container>
@@ -32,7 +37,7 @@ export const Formulario = () => {
           <Form.Input type="email" placeholder="Correo Electronico" name="email"onChange={formik.handleChange} error={formik.errors.email} value={formik.values.email}/>
           <Form.Input type="text" placeholder="Direccion" name="direccion"onChange={formik.handleChange} error={formik.errors.direccion} value={formik.values.direccion}/>
 
-          <Button type="submit">Registrar</Button>
+          <Button type="submit" onSubmit={finalizarCompra}>Terminar Compra</Button>
           <Button type="button" onClick={formik.handleReset}>Limpiar Formulario</Button>
       </Form>
     </Container>

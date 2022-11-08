@@ -3,6 +3,7 @@ import "../../Components/ItemsDetail/ItemDetail.css"
 import {ItemCount} from '../../Components/ItemCount/ItemCount'
 import {Link} from "react-router-dom";
 import { Context } from "../../context/CartContext";
+import Swal from 'sweetalert2';
 
 
 export const ItemDetail = ({ producto }) => {
@@ -13,6 +14,14 @@ export const ItemDetail = ({ producto }) => {
   const onAdd = (count) => {
     setIsPressedButton(true);
     addItem(producto, count);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Se agrego el producto al carrito',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
   };
 
   return (
@@ -25,7 +34,7 @@ export const ItemDetail = ({ producto }) => {
         <ItemCount stock={10} initial={1} onAdd={onAdd}/>
         ) : (
           <Link to="/cart">
-            <button>Finalizar Compra</button>
+            <button>Ver en Carrito</button>
           </Link>
         )
       }
