@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 
 export const Formulario = () => {
   const {cart, total, clear } = useContext(Context);
-  const [ comprador, setComprador ] = useState({});
+  const [ comprador, setComprador ] = useState([]);
 
   const formik = useFormik({
     initialValues: {
@@ -26,6 +26,7 @@ export const Formulario = () => {
       direccion: Yup.string().required("La contraseña es obligatoria"),
     }),
     onSubmit:(formData) => {
+      console.log(formData)
       setComprador(formData)
  
     } 
