@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import 'semantic-ui-css/semantic.min.css'
 import {Container, Form, Button} from "semantic-ui-react"
 import {useFormik} from "formik";
 import * as Yup from "yup"
 import { db } from '../../Components/Firebase/firebase';
-import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import { Context } from "../../context/CartContext";
 import Swal from 'sweetalert2';
 
 
 
 export const Formulario = () => {
-  const { quantity, cart, total, clear } = useContext(Context);
+  const {cart, total, clear } = useContext(Context);
+  const [ comprador, setComprador ] = useState({});
 
   const formik = useFormik({
     initialValues: {
@@ -25,27 +26,22 @@ export const Formulario = () => {
       direccion: Yup.string().required("La contraseña es obligatoria"),
     }),
     onSubmit:(formData) => {
-      console.log(formData)
-    }
+      setComprador(formData)
+ 
+    } 
     
  })
-
-
-
- const usuario = {
-  name: "Bruno",
-  phone: "+54 2975072078",
-  email: "user@mail.com"
-}
 
 const finalizarCompra = ()=>{
   const  ventasCollection = collection(db, "ventas");
   addDoc(ventasCollection,{
-      usuario,
-      items:cart,
-      total,
-      date:serverTimestamp()
-  })
+    buyer: {
+        comprador
+    },
+    items: cart,
+    total: total
+})
+
   .then(result => {
       console.log(result.id);
       Swal.fire({
